@@ -16,7 +16,7 @@ AirPlay、Chromecast、Sonos、DLNA 音箱上播放，支持多房间同步。�
 - 本地音乐：`storage.share.music:read` 只读挂载到 `/music`，用户在应用里加"本地文件夹"音乐源时
   路径填 `/music`。音乐文件不会被改动。
 - 出网（流媒体、元数据、封面）走宿主自己的路由，不经云吞的出口容器，所以不声明
-  `network.egress`（宿主网络下定论，见核心 ADR-0036）。
+  `network.egress`（核心对宿主网络出网的定论：宿主网络不经出口容器）。
 - 容器内挂 SMB/NFS 所需的 `SYS_ADMIN`、`DAC_READ_SEARCH`、`apparmor:unconfined` 一律不申请：
   宿主侧挂载再只读传入正是官方推荐的更安全做法。
 - 以 `PUID:PGID` 运行：镜像按非 root 运行设计（上游 Dockerfile 把 `/app`、`/tmp` 放开给所有用户）。
